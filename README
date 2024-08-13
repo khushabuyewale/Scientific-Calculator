@@ -1,0 +1,52 @@
+﻿# AdvancedScientificCalculations DLL
+
+## Overview
+This DLL provides advanced scientific calculation functionalities, including trigonometric functions, logarithms, exponential functions, complex number operations, and statistical functions. It also logs calculation history in a MySQL database.
+
+## Installation
+1. Ensure you have MySQL installed and running.
+2. Execute the provided SQL script to create the necessary database and table.
+
+## Usage
+### Example Code
+```csharp
+using System;
+using System.Collections.Generic;
+using AdvancedScientificCalculations;
+
+class Program
+{
+    static void Main()
+    {
+        var calculator = new ScientificCalculator();
+
+        // Trigonometric functions
+        double sinValue = calculator.Sin(Math.PI / 2);
+        Console.WriteLine($"Sin(π/2) = {sinValue}");
+
+        // Logarithms
+        double logValue = calculator.Log(100);
+        Console.WriteLine($"Log(100) = {logValue}");
+
+        // Exponential functions
+        double expValue = calculator.Exp(1);
+        Console.WriteLine($"Exp(1) = {expValue}");
+
+        // Complex number operations
+        var complexResult = calculator.AddComplex((1, 2), (3, 4));
+        Console.WriteLine($"(1+2i) + (3+4i) = ({complexResult.Item1} + {complexResult.Item2}i)");
+
+        // Statistical functions
+        var values = new List<double> { 1, 2, 3, 4, 5 };
+        double meanValue = calculator.Mean(values);
+        Console.WriteLine($"Mean = {meanValue}");
+
+        // Log calculation
+        calculator.LogCalculation("Mean Calculation", meanValue);
+
+        // Additional checks for database logging
+        var stdDevValue = calculator.StandardDeviation(values);
+        Console.WriteLine($"Standard Deviation = {stdDevValue}");
+        calculator.LogCalculation("Standard Deviation Calculation", stdDevValue);
+    }
+}
